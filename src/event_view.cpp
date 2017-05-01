@@ -19,7 +19,8 @@
 
 #include "event_view.hpp"
 
-EventView::EventView()
+
+EventView::EventView(QWidget* p): QTableView(p)
 {
 
 }

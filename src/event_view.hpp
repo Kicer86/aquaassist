@@ -27,7 +27,7 @@
 class EventView : public QTableView
 {
     public:
-        EventView();
+        EventView(QWidget * = nullptr);
         EventView(const EventView &) = delete;
         ~EventView();
         
