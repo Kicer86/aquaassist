@@ -21,13 +21,15 @@
 #include "main_window.hpp"
 
 
-MainWindow::MainWindow(): QMainWindow()
+MainWindow::MainWindow(): 
+    QMainWindow(),
+    m_ui(new Ui_MainWindow)
 {
-
+    m_ui->setupUi(this);
 }
 
 
 MainWindow::~MainWindow()
 {
-
+    delete m_ui;
 }

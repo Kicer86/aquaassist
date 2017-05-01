@@ -23,15 +23,20 @@
 
 #include <QMainWindow>
 
+#include "ui_main_window.h"
+
 
 class MainWindow: public QMainWindow
 {
-public:
-    MainWindow();
-    MainWindow(const MainWindow &) = delete;
-    ~MainWindow();
-    
-    MainWindow& operator=(const MainWindow& other) = delete;
+    public:
+        MainWindow();
+        MainWindow(const MainWindow &) = delete;
+        ~MainWindow();
+        
+        MainWindow& operator=(const MainWindow& other) = delete;
+        
+    private:    
+        Ui_MainWindow* m_ui;
 };
 
 #endif // MAIN_WINDOW_HPP
