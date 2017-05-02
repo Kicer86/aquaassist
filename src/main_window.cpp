@@ -17,19 +17,43 @@
  *
  */
 
+#include <QLineEdit>
+#include <QHBoxLayout>
+#include <QStackedLayout>
 
 #include "main_window.hpp"
 
 
 MainWindow::MainWindow(): 
     QMainWindow(),
-    m_ui(new Ui_MainWindow)
+    m_ui(std::make_unique<Ui_MainWindow>())
 {
     m_ui->setupUi(this);
+    
+    // finish ui construction
+    QWidget* waterParametricsWidget = new QWidget(this);
+    QWidget* waterReplacementWidget = new QWidget(this);
+    
+    //waterParametricsWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
+    //waterReplacementWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
+    
+    QHBoxLayout* waterParametricsLayout = new QHBoxLayout(waterParametricsWidget);
+    QHBoxLayout* waterReplacementLayout = new QHBoxLayout(waterReplacementWidget);
+    m_ui->eventStackedWidget->addWidget(waterParametricsWidget);
+    m_ui->eventStackedWidget->addWidget(waterReplacementWidget);
+    
+    for(const char* parameter: {"pH", "TwO", "TwW", "NH3", "NO2", "NO3", "K", "P", "Fe", "CO2"})
+    {
+        QLabel* l = new QLabel(parameter, this);
+        QLineEdit* e = new QLineEdit(this);
+        
+        waterParametricsLayout->addWidget(l);
+        waterParametricsLayout->addWidget(e);
+    }
 }
 
 
 MainWindow::~MainWindow()
 {
-    delete m_ui;
+    
 }

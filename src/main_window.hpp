@@ -23,6 +23,8 @@
 
 #include <QMainWindow>
 
+#include <memory>
+
 #include "ui_main_window.h"
 
 
@@ -36,7 +38,7 @@ class MainWindow: public QMainWindow
         MainWindow& operator=(const MainWindow& other) = delete;
         
     private:    
-        Ui_MainWindow* m_ui;
+        std::unique_ptr<Ui_MainWindow> m_ui;
 };
 
 #endif // MAIN_WINDOW_HPP
