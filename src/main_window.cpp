@@ -34,9 +34,6 @@ MainWindow::MainWindow():
     QWidget* waterParametricsWidget = new QWidget(this);
     QWidget* waterReplacementWidget = new QWidget(this);
     
-    //waterParametricsWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
-    //waterReplacementWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
-    
     QHBoxLayout* waterParametricsLayout = new QHBoxLayout(waterParametricsWidget);
     QHBoxLayout* waterReplacementLayout = new QHBoxLayout(waterReplacementWidget);
     m_ui->eventStackedWidget->addWidget(waterParametricsWidget);
