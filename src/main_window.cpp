@@ -40,7 +40,8 @@ MainWindow::MainWindow():
     m_ui->eventStackedWidget->addWidget(waterReplacementWidget);
     
     int r = 0;
-    for(const char* parameter: {"pH", "TwO", "TwW", "NH3", "NO2", "NO3", "K", "P", "Fe", "CO2"})
+    for(const QString& parameter: {tr("pH"), tr("TwO"), tr("TwW"), tr("NH3"), tr("NO2"), 
+                                   tr("NO3"), tr("K"), tr("P"), tr("Fe"), tr("CO2")})
     {
         QLabel* l = new QLabel(parameter, this);
         QLineEdit* e = new QLineEdit(this);
