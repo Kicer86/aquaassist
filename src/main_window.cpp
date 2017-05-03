@@ -18,7 +18,7 @@
  */
 
 #include <QLineEdit>
-#include <QHBoxLayout>
+#include <QGridLayout>
 #include <QStackedLayout>
 
 #include "main_window.hpp"
@@ -34,18 +34,21 @@ MainWindow::MainWindow():
     QWidget* waterParametricsWidget = new QWidget(this);
     QWidget* waterReplacementWidget = new QWidget(this);
     
-    QHBoxLayout* waterParametricsLayout = new QHBoxLayout(waterParametricsWidget);
+    QGridLayout* waterParametricsLayout = new QGridLayout(waterParametricsWidget);
     QHBoxLayout* waterReplacementLayout = new QHBoxLayout(waterReplacementWidget);
     m_ui->eventStackedWidget->addWidget(waterParametricsWidget);
     m_ui->eventStackedWidget->addWidget(waterReplacementWidget);
     
+    int r = 0;
     for(const char* parameter: {"pH", "TwO", "TwW", "NH3", "NO2", "NO3", "K", "P", "Fe", "CO2"})
     {
         QLabel* l = new QLabel(parameter, this);
         QLineEdit* e = new QLineEdit(this);
         
-        waterParametricsLayout->addWidget(l);
-        waterParametricsLayout->addWidget(e);
+        waterParametricsLayout->addWidget(l, r, 0);
+        waterParametricsLayout->addWidget(e, r, 1);
+        
+        r++;
     }
 }
 
