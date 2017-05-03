@@ -43,7 +43,7 @@ MainWindow::MainWindow():
     
     int r = 0;
     waterParametricsLayout->addWidget(new QLabel(tr("Data pomiaru:"), this), r, 0);
-    waterParametricsLayout->addWidget(new QDateTimeEdit(this),r , 1);
+    waterParametricsLayout->addWidget(new QDateTimeEdit(this), r, 1);
     
     r++;
     
