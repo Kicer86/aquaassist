@@ -43,7 +43,14 @@
        </layout>
       </item>
       <item>
-       <widget class="QStackedWidget" name="eventStackedWidget"/>
+       <widget class="QStackedWidget" name="eventStackedWidget">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
