@@ -17,8 +17,10 @@
  *
  */
 
-#include <QLineEdit>
+#include <QDateTimeEdit>
 #include <QGridLayout>
+#include <QLineEdit>
+#include <QPushButton>
 #include <QStackedLayout>
 
 #include "main_window.hpp"
@@ -40,6 +42,11 @@ MainWindow::MainWindow():
     m_ui->eventStackedWidget->addWidget(waterReplacementWidget);
     
     int r = 0;
+    waterParametricsLayout->addWidget(new QLabel(tr("Data pomiaru:"), this), r, 0);
+    waterParametricsLayout->addWidget(new QDateTimeEdit(this),r , 1);
+    
+    r++;
+    
     for(const QString& parameter: {tr("pH"), tr("TwO"), tr("TwW"), tr("NH3"), tr("NO2"), 
                                    tr("NO3"), tr("K"), tr("P"), tr("Fe"), tr("CO2")})
     {
@@ -52,11 +59,21 @@ MainWindow::MainWindow():
         r++;
     }
     
+    QPushButton* applyParametricsButton = new QPushButton(tr("Dodaj"), this);
+    connect(applyParametricsButton, &QPushButton::pressed, this, &MainWindow::addWaterParametrics);
+    
+    waterParametricsLayout->addWidget(applyParametricsButton, r, 1);
     waterParametricsLayout->addWidget(new QWidget(this));
 }
 
 
 MainWindow::~MainWindow()
+{
+    
+}
+
+
+void MainWindow::addWaterParametrics()
 {
     
 }

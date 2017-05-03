@@ -39,6 +39,8 @@ class MainWindow: public QMainWindow
         
     private:    
         std::unique_ptr<Ui_MainWindow> m_ui;
+        
+        void addWaterParametrics();
 };
 
 #endif // MAIN_WINDOW_HPP
