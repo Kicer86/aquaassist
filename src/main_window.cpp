@@ -51,7 +51,7 @@ MainWindow::MainWindow():
         r++;
     }
     
-    waterParametricsLayout->addWidget(new QWidget(this), r);
+    waterParametricsLayout->addWidget(new QWidget(this));
 }
 
 
