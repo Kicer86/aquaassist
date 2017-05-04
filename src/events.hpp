@@ -58,6 +58,10 @@ class Event final
         Event(const Event::Type &, const Parametrics &);
         ~Event();
 
+        Type type() const;
+        const boost::any& data() const;
+
+
     private:
         boost::any m_data;
         Type m_type;

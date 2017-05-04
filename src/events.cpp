@@ -32,6 +32,18 @@ Event::~Event()
 }
 
 
+Event::Type Event::type() const
+{
+    return m_type;
+}
+
+
+const boost::any & Event::data() const
+{
+    return m_data;
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 
