@@ -20,7 +20,7 @@
 #include "events.hpp"
 
 
-Event::Event(const Event::Type& type, const Parametrics& data): m_type(type), m_data(data)
+Event::Event(const Event::Type& type, const Parametrics& data): m_data(data), m_type(type)
 {
 
 }
@@ -35,7 +35,7 @@ Event::~Event()
 ///////////////////////////////////////////////////////////////////////////////
 
 
-Events::Events()
+Events::Events(): m_events()
 {
 
 }
