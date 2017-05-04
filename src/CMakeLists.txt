@@ -1,10 +1,13 @@
 
 find_package(Qt5Widgets REQUIRED)
+find_package(Boost REQUIRED)
 
 qt5_wrap_ui(wrapped_ui main_window.ui)
 
 
 add_executable(aquaassist
+                events.cpp
+                events.hpp
                 events_model.cpp
                 events_model.hpp
                 main.cpp
@@ -16,6 +19,7 @@ add_executable(aquaassist
 target_link_libraries(aquaassist
                         PRIVATE
                             Qt5::Widgets
+                            ${Boost_INCLUDES}
 )
 
 
