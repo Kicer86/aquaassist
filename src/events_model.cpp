@@ -30,3 +30,21 @@ EventsModel::~EventsModel()
 {
 
 }
+
+
+QVariant EventsModel::data(const QModelIndex& idx, int role) const
+{
+
+}
+
+
+int EventsModel::rowCount(const QModelIndex& parent) const
+{
+
+}
+
+
+int EventsModel::columnCount(const QModelIndex& parent) const
+{
+
+}

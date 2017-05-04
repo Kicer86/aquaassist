@@ -20,16 +20,22 @@
 #ifndef EVENTS_MODEL_HPP
 #define EVENTS_MODEL_HPP
 
-#include <QAbstractItemModel>
+#include <QAbstractTableModel>
 
-class EventsModel : public QAbstractItemModel
+class EventsModel: public QAbstractTableModel
 {
     public:
         EventsModel();
         EventsModel(const EventsModel &) = delete;
         ~EventsModel();
-        
+
         EventsModel& operator=(const EventsModel &) = delete;
+
+        // QAbstractTableModel:
+        QVariant data(const QModelIndex &, int) const override;
+        int rowCount(const QModelIndex &) const override;
+        int columnCount(const QModelIndex &) const override;
+
 };
 
 #endif // EVENTS_MODEL_HPP
