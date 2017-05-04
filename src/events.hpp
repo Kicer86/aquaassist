@@ -21,6 +21,7 @@
 #define EVENTS_HPP
 
 #include <map>
+#include <ratio>
 
 #include <QDateTime>
 
@@ -36,12 +37,29 @@ class Event final
             Replacement,
         };
 
-        Event();
+        enum class Parameter
+        {
+            pH  = 1,
+            GH  = 2,
+            KH  = 3,
+            NH3 = 4,
+            NO2 = 5,
+            NO3 = 6,
+            K   = 7,
+            P   = 9,
+            Fe  = 10,
+            CO2 = 11,
+        };
+
+        typedef std::milli ParameterValue;
+        typedef std::map<Parameter, ParameterValue> Parametrics;
+
+        Event(const Event::Type &, const Parametrics &);
         ~Event();
 
     private:
         boost::any m_data;
-
+        Type m_type;
 };
 
 
@@ -53,6 +71,10 @@ class Events
         ~Events();
 
         Events& operator=(const Events &) = delete;
+
+        void insert(const QDateTime &, const Event &);
+
+        const std::map<QDateTime, Event>& events() const;
 
     private:
         std::map<QDateTime, Event> m_events;

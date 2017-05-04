@@ -20,7 +20,7 @@
 #include "events.hpp"
 
 
-Event::Event()
+Event::Event(const Event::Type& type, const Parametrics& data): m_type(type), m_data(data)
 {
 
 }
@@ -44,5 +44,17 @@ Events::Events()
 Events::~Events()
 {
 
+}
+
+
+void Events::insert(const QDateTime& time, const Event& event)
+{
+    m_events.emplace(time, event);
+}
+
+
+const std::map<QDateTime, Event>& Events::events() const
+{
+    return m_events;
 }
 
