@@ -22,6 +22,8 @@
 
 #include <QAbstractTableModel>
 
+#include "events.hpp"
+
 class EventsModel: public QAbstractTableModel
 {
     public:
@@ -36,6 +38,8 @@ class EventsModel: public QAbstractTableModel
         int rowCount(const QModelIndex &) const override;
         int columnCount(const QModelIndex &) const override;
 
+    private:
+        Events m_events;
 };
 
 #endif // EVENTS_MODEL_HPP
