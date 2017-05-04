@@ -20,6 +20,7 @@
 #ifndef EVENTS_HPP
 #define EVENTS_HPP
 
+#include <deque>
 #include <map>
 #include <ratio>
 
@@ -74,10 +75,10 @@ class Events
 
         void insert(const QDateTime &, const Event &);
 
-        const std::map<QDateTime, Event>& events() const;
+        const std::deque< std::pair<QDateTime, Event> >& events() const;
 
     private:
-        std::map<QDateTime, Event> m_events;
+        std::deque< std::pair<QDateTime, Event> > m_events;
 };
 
 #endif // EVENTS_HPP

@@ -49,11 +49,11 @@ Events::~Events()
 
 void Events::insert(const QDateTime& time, const Event& event)
 {
-    m_events.emplace(time, event);
+    m_events.emplace_back(time, event);
 }
 
 
-const std::map<QDateTime, Event>& Events::events() const
+const std::deque< std::pair<QDateTime, Event> >& Events::events() const
 {
     return m_events;
 }
