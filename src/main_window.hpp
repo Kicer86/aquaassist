@@ -27,6 +27,8 @@
 
 #include "ui_main_window.h"
 
+#include "events_model.hpp"
+
 
 class MainWindow: public QMainWindow
 {
@@ -34,12 +36,13 @@ class MainWindow: public QMainWindow
         MainWindow();
         MainWindow(const MainWindow &) = delete;
         ~MainWindow();
-        
+
         MainWindow& operator=(const MainWindow& other) = delete;
-        
-    private:    
+
+    private:
         std::unique_ptr<Ui_MainWindow> m_ui;
-        
+        EventsModel m_eventsModel;
+
         void addWaterParametrics();
 };
 
