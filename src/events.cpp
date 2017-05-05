@@ -18,3 +18,5 @@
  */
 
 #include "events.hpp"
+
+template class EventsContainer<WaterParametrics::List>;

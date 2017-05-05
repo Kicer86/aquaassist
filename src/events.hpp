@@ -81,4 +81,6 @@ class EventsContainer
 
 typedef EventsContainer<WaterParametrics::List> WaterParametricsContainer;
 
+extern template class EventsContainer<WaterParametrics::List>;
+
 #endif // EVENTS_HPP
