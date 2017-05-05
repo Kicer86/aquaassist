@@ -68,29 +68,14 @@ EventsModel::~EventsModel()
 
 QVariant EventsModel::data(const QModelIndex& idx, int role) const
 {
-    /*
-    const std::deque< std::pair<QDateTime, Event> >& events = m_events.events();
-
     assert(idx.isValid());
     assert(idx.column() < 2);
-    assert(idx.row() < static_cast<int>(events.size()));
+    assert(idx.row() < static_cast<int>(m_decorationRoles.size()));
 
-    const std::pair<QDateTime, Event>& event = events[idx.row()];
-
-    QVariant result;
-
-    if (role == Qt::DisplayRole)
-    {
-        if (idx.column() == 0)
-            result = event.first;
-        else
-        {
-
-        }
-    }
+    const QVariant result = idx.column() == 0 ? QVariant(m_decorationRoles[idx.row()].first):
+                                                QVariant(m_decorationRoles[idx.row()].second);
 
     return result;
-    */
 }
 
 
