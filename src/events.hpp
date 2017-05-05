@@ -49,9 +49,13 @@ namespace WaterParametrics
 }
 
 
-struct EventsContainerBase: QObject
+class EventsContainerBase: public QObject
 {
-    Q_OBJECT
+        Q_OBJECT
+
+    public:
+        EventsContainerBase();
+        virtual ~EventsContainerBase();
 
     signals:
         void changed();
@@ -59,16 +63,16 @@ struct EventsContainerBase: QObject
 
 
 template<typename T>
-class EventsContainer
+class EventsContainer: public EventsContainerBase
 {
     public:
-        EventsContainer()
+        EventsContainer(): EventsContainerBase()
         {
         }
 
         EventsContainer(const EventsContainer &) = delete;
 
-        ~EventsContainer()
+        virtual ~EventsContainer()
         {
 
         }

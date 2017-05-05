@@ -20,3 +20,14 @@
 #include "events.hpp"
 
 template class EventsContainer<WaterParametrics::List>;
+
+
+EventsContainerBase::EventsContainerBase(): QObject()
+{
+}
+
+
+EventsContainerBase::~EventsContainerBase()
+{
+}
+
