@@ -82,6 +82,8 @@ class EventsContainer: public EventsContainerBase
         void insert(const QDateTime& time, const T& data)
         {
             m_events.emplace_back(time, data);
+
+            emit changed();
         }
 
         const std::deque< std::pair<QDateTime, T> >& list() const
