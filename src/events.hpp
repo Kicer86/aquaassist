@@ -25,6 +25,7 @@
 #include <ratio>
 
 #include <QDateTime>
+#include <QObject>
 
 
 namespace WaterParametrics
@@ -46,6 +47,15 @@ namespace WaterParametrics
     typedef std::milli Value;
     typedef std::map<Type, Value> List;
 }
+
+
+struct EventsContainerBase: QObject
+{
+    Q_OBJECT
+
+    signals:
+        void changed();
+};
 
 
 template<typename T>
