@@ -26,63 +26,59 @@
 
 #include <QDateTime>
 
-#include <boost/any.hpp>
+
+namespace WaterParametrics
+{
+    enum class Type
+    {
+        pH  = 1,
+        GH  = 2,
+        KH  = 3,
+        NH3 = 4,
+        NO2 = 5,
+        NO3 = 6,
+        K   = 7,
+        P   = 9,
+        Fe  = 10,
+        CO2 = 11,
+    };
+
+    typedef std::milli Value;
+    typedef std::map<Type, Value> List;
+}
 
 
-class Event final
+template<typename T>
+class EventsContainer
 {
     public:
-        enum class Type
+        EventsContainer()
         {
-            Parametrics,
-            Replacement,
-        };
+        }
 
-        enum class Parameter
+        EventsContainer(const EventsContainer &) = delete;
+
+        ~EventsContainer()
         {
-            pH  = 1,
-            GH  = 2,
-            KH  = 3,
-            NH3 = 4,
-            NO2 = 5,
-            NO3 = 6,
-            K   = 7,
-            P   = 9,
-            Fe  = 10,
-            CO2 = 11,
-        };
 
-        typedef std::milli ParameterValue;
-        typedef std::map<Parameter, ParameterValue> Parametrics;
+        }
 
-        Event(const Event::Type &, const Parametrics &);
-        ~Event();
+        EventsContainer& operator=(const EventsContainer &) = delete;
 
-        Type type() const;
-        const boost::any& data() const;
+        void insert(const QDateTime& time, const T& data)
+        {
+            m_events.emplace_back(time, data);
+        }
 
+        const std::deque< std::pair<QDateTime, T> >& list() const
+        {
+            return m_events;
+        }
 
     private:
-        boost::any m_data;
-        Type m_type;
+        std::deque<std::pair<QDateTime, T> > m_events;
 };
 
-
-class Events
-{
-    public:
-        Events();
-        Events(const Events &) = delete;
-        ~Events();
-
-        Events& operator=(const Events &) = delete;
-
-        void insert(const QDateTime &, const Event &);
-
-        const std::deque< std::pair<QDateTime, Event> >& events() const;
-
-    private:
-        std::deque< std::pair<QDateTime, Event> > m_events;
-};
+typedef EventsContainer<WaterParametrics::List> WaterParametricsContainer;
 
 #endif // EVENTS_HPP

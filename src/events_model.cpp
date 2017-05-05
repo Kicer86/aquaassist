@@ -24,6 +24,7 @@
 
 namespace
 {
+    /*
     QString displayRoleFor(const Event& event)
     {
         QString text;
@@ -48,6 +49,7 @@ namespace
 
         return text;
     }
+    */
 }
 
 
@@ -65,6 +67,7 @@ EventsModel::~EventsModel()
 
 QVariant EventsModel::data(const QModelIndex& idx, int role) const
 {
+    /*
     const std::deque< std::pair<QDateTime, Event> >& events = m_events.events();
 
     assert(idx.isValid());
@@ -86,12 +89,13 @@ QVariant EventsModel::data(const QModelIndex& idx, int role) const
     }
 
     return result;
+    */
 }
 
 
 int EventsModel::rowCount(const QModelIndex& parent) const
 {
-    const int rows = parent.isValid()? 0 : m_events.events().size();
+    const int rows = parent.isValid()? 0 : m_events.list().size();
 
     return rows;
 }

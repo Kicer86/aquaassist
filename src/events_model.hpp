@@ -39,7 +39,7 @@ class EventsModel: public QAbstractTableModel
         int columnCount(const QModelIndex &) const override;
 
     private:
-        Events m_events;
+        WaterParametricsContainer m_events;
 };
 
 #endif // EVENTS_MODEL_HPP
