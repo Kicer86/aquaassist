@@ -54,7 +54,7 @@ namespace
 }
 
 
-EventsModel::EventsModel(): m_waterParametrics()
+EventsModel::EventsModel(): m_waterParametrics(), m_decorationRoles()
 {
     connect(&m_waterParametrics, &WaterParametricsContainer::changed, this, &EventsModel::refreshData);
 }
@@ -72,8 +72,11 @@ QVariant EventsModel::data(const QModelIndex& idx, int role) const
     assert(idx.column() < 2);
     assert(idx.row() < static_cast<int>(m_decorationRoles.size()));
 
-    const QVariant result = idx.column() == 0 ? QVariant(m_decorationRoles[idx.row()].first):
-                                                QVariant(m_decorationRoles[idx.row()].second);
+    QVariant result;
+
+    if (role == Qt::DecorationRole)
+        result = idx.column() == 0 ? QVariant(m_decorationRoles[idx.row()].first):
+                                     QVariant(m_decorationRoles[idx.row()].second);
 
     return result;
 }

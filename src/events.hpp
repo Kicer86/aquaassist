@@ -66,7 +66,7 @@ template<typename T>
 class EventsContainer: public EventsContainerBase
 {
     public:
-        EventsContainer(): EventsContainerBase()
+        EventsContainer(): EventsContainerBase(), m_events()
         {
         }
 
