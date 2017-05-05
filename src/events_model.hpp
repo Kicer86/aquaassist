@@ -39,7 +39,11 @@ class EventsModel: public QAbstractTableModel
         int columnCount(const QModelIndex &) const override;
 
     private:
-        WaterParametricsContainer m_events;
+        WaterParametricsContainer m_waterParametrics;
+
+        std::deque< std::pair<QDateTime, QString> > m_decorationRoles;
+
+        void refreshData();
 };
 
 #endif // EVENTS_MODEL_HPP

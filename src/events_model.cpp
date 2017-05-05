@@ -24,38 +24,39 @@
 
 namespace
 {
-    /*
-    QString displayRoleFor(const Event& event)
+    template<typename T> QString displayRoleFor(const T& event);
+
+    template<>
+    QString displayRoleFor<WaterParametrics::List>(const WaterParametrics::List& waterParameters)
     {
         QString text;
 
-        switch(event.type())
+        for(const std::pair<WaterParametrics::Type, WaterParametrics::Value>& param: waterParameters)
         {
-            case Event::Type::Parametrics:
-            {
-                const Event::Parametrics* parametrics = boost::any_cast<Event::Parametrics>(&event.data());
 
-                for(const std::pair<Event::Parameter, Event::ParameterValue>& param: *parametrics)
-                {
-
-                }
-
-                break;
-            }
-
-            case Event::Type::Replacement:
-                break;
         }
 
         return text;
     }
-    */
+
+    template<typename T> std::deque<std::pair<QDateTime, QString>> displayRoleFor(const EventsContainer<T>& event);
+
+    template<>
+    std::deque<std::pair<QDateTime, QString>> displayRoleFor<WaterParametrics::List>(const EventsContainer<WaterParametrics::List>& waterParameters)
+    {
+        std::deque<std::pair<QDateTime, QString>> result;
+
+        for(const std::pair<QDateTime, WaterParametrics::List>& params: waterParameters.list())
+            result.emplace_back(params.first, displayRoleFor(params.second));
+
+        return result;
+    }
 }
 
 
-EventsModel::EventsModel(): m_events()
+EventsModel::EventsModel(): m_waterParametrics()
 {
-
+    connect(&m_waterParametrics, &WaterParametricsContainer::changed, this, &EventsModel::refreshData);
 }
 
 
@@ -95,7 +96,7 @@ QVariant EventsModel::data(const QModelIndex& idx, int role) const
 
 int EventsModel::rowCount(const QModelIndex& parent) const
 {
-    const int rows = parent.isValid()? 0 : m_events.list().size();
+    const int rows = parent.isValid()? 0 : m_waterParametrics.list().size();
 
     return rows;
 }
@@ -106,4 +107,18 @@ int EventsModel::columnCount(const QModelIndex& parent) const
     const int columns = parent.isValid()? 0: 2;
 
     return columns;
+}
+
+
+void EventsModel::refreshData()
+{
+    m_decorationRoles.clear();
+
+    const auto waterParametersDecorated = displayRoleFor(m_waterParametrics);
+    m_decorationRoles.insert(m_decorationRoles.end(), waterParametersDecorated.begin(), waterParametersDecorated.end());
+
+    std::sort(m_decorationRoles.begin(), m_decorationRoles.end(), [](const std::pair<QDateTime, QString>& lhs, const std::pair<QDateTime, QString>& rhs)
+    {
+        return lhs.first < rhs.first;
+    });
 }
