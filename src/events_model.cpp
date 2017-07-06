@@ -66,6 +66,12 @@ EventsModel::~EventsModel()
 }
 
 
+void EventsModel::insert(const QDateTime& time, const WaterParametrics::List& parametrics)
+{
+    m_waterParametrics.insert(time, parametrics);
+}
+
+
 QVariant EventsModel::data(const QModelIndex& idx, int role) const
 {
     assert(idx.isValid());

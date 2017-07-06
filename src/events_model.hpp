@@ -32,6 +32,8 @@ class EventsModel: public QAbstractTableModel
         ~EventsModel();
 
         EventsModel& operator=(const EventsModel &) = delete;
+        
+        void insert(const QDateTime &, const WaterParametrics::List &);
 
         // QAbstractTableModel:
         QVariant data(const QModelIndex &, int) const override;
