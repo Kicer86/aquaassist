@@ -44,7 +44,7 @@ namespace WaterParametrics
         CO2,
     };
 
-    typedef std::milli Value;
+    typedef double Value;
     typedef std::map<Type, Value> List;
 }
 
