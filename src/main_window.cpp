@@ -47,9 +47,9 @@ MainWindow::MainWindow():
     waterParametricsLayout->addWidget(new QDateTimeEdit(this), r, 1);
 
     r++;
-
-    for(const QString& parameter: {tr("pH"), tr("TwO"), tr("TwW"), tr("NH3"), tr("NO2"),
-                                   tr("NO3"), tr("K"), tr("P"), tr("Fe"), tr("CO2")})
+    
+    for(const QString& parameter: {tr("pH"), tr("TwO"), tr("TwW"), tr("NH₃"), tr("NO₂"), 
+                                   tr("NO₃"), tr("K"), tr("P"), tr("Fe"), tr("CO₂")})
     {
         QLabel* l = new QLabel(parameter + ":", this);
         QLineEdit* e = new QLineEdit(this);
