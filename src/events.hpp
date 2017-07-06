@@ -32,16 +32,16 @@ namespace WaterParametrics
 {
     enum class Type
     {
-        pH  = 1,
-        GH  = 2,
-        KH  = 3,
-        NH3 = 4,
-        NO2 = 5,
-        NO3 = 6,
-        K   = 7,
-        P   = 9,
-        Fe  = 10,
-        CO2 = 11,
+        pH,
+        GH,
+        KH,
+        NH3,
+        NO2,
+        NO3,
+        K,
+        P,
+        Fe,
+        CO2,
     };
 
     typedef std::milli Value;
