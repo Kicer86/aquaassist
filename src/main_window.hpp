@@ -40,8 +40,11 @@ class MainWindow: public QMainWindow
         MainWindow& operator=(const MainWindow& other) = delete;
 
     private:
+        typedef std::pair<WaterParametrics::Type, QLineEdit *> Editor;
+        
         std::unique_ptr<Ui_MainWindow> m_ui;
-        EventsModel m_eventsModel;
+        EventsModel m_eventsModel;        
+        std::vector<Editor> m_editors;
 
         void addWaterParametrics();
 };

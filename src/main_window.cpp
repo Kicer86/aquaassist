@@ -17,19 +17,39 @@
  *
  */
 
+#include "main_window.hpp"
+
 #include <QDateTimeEdit>
 #include <QGridLayout>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QStackedLayout>
 
-#include "main_window.hpp"
+
+namespace 
+{
+    typedef std::pair<WaterParametrics::Type, QString> ParameterName;
+    const std::array<ParameterName, 10> parameterNames
+    {
+        std::make_pair( WaterParametrics::Type::pH,  QObject::tr("pH")  ),
+        std::make_pair( WaterParametrics::Type::GH,  QObject::tr("TwO") ), 
+        std::make_pair( WaterParametrics::Type::KH,  QObject::tr("TwW") ), 
+        std::make_pair( WaterParametrics::Type::NH3, QObject::tr("NH₃") ), 
+        std::make_pair( WaterParametrics::Type::NO2, QObject::tr("NO₂") ),
+        std::make_pair( WaterParametrics::Type::NO3, QObject::tr("NO₃") ), 
+        std::make_pair( WaterParametrics::Type::K,   QObject::tr("K")   ), 
+        std::make_pair( WaterParametrics::Type::P,   QObject::tr("P")   ), 
+        std::make_pair( WaterParametrics::Type::Fe,  QObject::tr("Fe")  ), 
+        std::make_pair( WaterParametrics::Type::CO2, QObject::tr("CO₂") )
+    };
+}
 
 
 MainWindow::MainWindow():
     QMainWindow(),
     m_ui(std::make_unique<Ui_MainWindow>()),
-    m_eventsModel()
+    m_eventsModel(),
+    m_editors()
 {
     m_ui->setupUi(this);
 
@@ -48,14 +68,15 @@ MainWindow::MainWindow():
 
     r++;
     
-    for(const QString& parameter: {tr("pH"), tr("TwO"), tr("TwW"), tr("NH₃"), tr("NO₂"), 
-                                   tr("NO₃"), tr("K"), tr("P"), tr("Fe"), tr("CO₂")})
+    for(const auto& parameter: parameterNames)
     {
-        QLabel* l = new QLabel(parameter + ":", this);
+        QLabel* l = new QLabel(parameter.second + ":", this);
         QLineEdit* e = new QLineEdit(this);
 
         waterParametricsLayout->addWidget(l, r, 0);
         waterParametricsLayout->addWidget(e, r, 1);
+        
+        m_editors.push_back(std::make_pair(parameter.first, e));
 
         r++;
     }
@@ -76,5 +97,5 @@ MainWindow::~MainWindow()
 
 void MainWindow::addWaterParametrics()
 {
-
+    
 }
