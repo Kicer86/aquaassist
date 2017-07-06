@@ -30,6 +30,9 @@
 #include "events_model.hpp"
 
 
+class QDateTimeEdit;
+
+
 class MainWindow: public QMainWindow
 {
     public:
@@ -45,6 +48,7 @@ class MainWindow: public QMainWindow
         std::unique_ptr<Ui_MainWindow> m_ui;
         EventsModel m_eventsModel;        
         std::vector<Editor> m_editors;
+        QDateTimeEdit* m_timeEdit;
 
         void addWaterParametrics();
 };

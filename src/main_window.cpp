@@ -49,7 +49,8 @@ MainWindow::MainWindow():
     QMainWindow(),
     m_ui(std::make_unique<Ui_MainWindow>()),
     m_eventsModel(),
-    m_editors()
+    m_editors(),
+    m_timeEdit(nullptr)
 {
     m_ui->setupUi(this);
 
@@ -63,8 +64,9 @@ MainWindow::MainWindow():
     m_ui->eventStackedWidget->addWidget(waterReplacementWidget);
 
     int r = 0;
+    m_timeEdit = new QDateTimeEdit(this);
     waterParametricsLayout->addWidget(new QLabel(tr("Data pomiaru:"), this), r, 0);
-    waterParametricsLayout->addWidget(new QDateTimeEdit(this), r, 1);
+    waterParametricsLayout->addWidget(m_timeEdit, r, 1);
 
     r++;
     
@@ -97,5 +99,23 @@ MainWindow::~MainWindow()
 
 void MainWindow::addWaterParametrics()
 {
+    WaterParametrics::List parameters;
     
+    for (const auto& editor: m_editors)
+    {
+        const QString value = editor.second->text();
+        
+        if (value.isEmpty() == false)
+        {
+            const double numeric = value.toDouble();
+            const WaterParametrics::Value parameterValue(numeric);
+            parameters.emplace(editor.first, parameterValue);
+        }
+    }
+    
+    if (parameters.empty() == false)
+    {
+        const QDateTime time = m_timeEdit->dateTime();
+        m_eventsModel.insert(time, parameters);
+    }
 }
