@@ -53,7 +53,7 @@ namespace
 }
 
 
-AllEventsModel::AllEventsModel(): m_events(), m_decorationRoles()
+AllEventsModel::AllEventsModel(): m_decorationRoles()
 {
     
 }
@@ -62,13 +62,6 @@ AllEventsModel::AllEventsModel(): m_events(), m_decorationRoles()
 AllEventsModel::~AllEventsModel()
 {
 
-}
-
-
-void AllEventsModel::insert(const QDateTime& time, const WaterParameters::List& parametrics)
-{
-    auto waterParameters = std::make_unique<WaterParameters>(parametrics);
-    m_events.insert(std::make_pair(time, std::move(waterParameters)) );
 }
 
 
@@ -90,7 +83,7 @@ QVariant AllEventsModel::data(const QModelIndex& idx, int role) const
 
 int AllEventsModel::rowCount(const QModelIndex& parent) const
 {
-    const int rows = parent.isValid()? 0 : m_events.size();
+    const int rows = parent.isValid()? 0 : 0; //m_events.size();
 
     return rows;
 }

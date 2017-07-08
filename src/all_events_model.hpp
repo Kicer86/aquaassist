@@ -35,16 +35,13 @@ class AllEventsModel: public QAbstractTableModel
         ~AllEventsModel();
 
         AllEventsModel& operator=(const AllEventsModel &) = delete;
-        
-        void insert(const QDateTime &, const WaterParameters::List &);
-
+    
         // QAbstractTableModel:
         QVariant data(const QModelIndex &, int) const override;
         int rowCount(const QModelIndex &) const override;
         int columnCount(const QModelIndex &) const override;
 
     private:
-        std::map<QDateTime, std::unique_ptr<IEvent>> m_events;
         std::deque< std::pair<QDateTime, QString> > m_decorationRoles;
 
         void refreshData();
