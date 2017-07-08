@@ -5,6 +5,8 @@ qt5_wrap_ui(wrapped_ui main_window.ui)
 #qt5_wrap_cpp(wrapped_cpp events.hpp)
 
 add_executable(aquaassist
+                all_events_model.cpp
+                all_events_model.hpp
                 events.cpp
                 events.hpp
                 events_model.cpp
