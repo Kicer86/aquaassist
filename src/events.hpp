@@ -61,6 +61,8 @@ class WaterParameters: public IEvent
         
         virtual void visit(IEventVisitor *);
         
+        const List& get() const;
+        
     private:
         List m_values;
 };

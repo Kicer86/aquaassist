@@ -31,3 +31,8 @@ void WaterParameters::visit(IEventVisitor* visitor)
     visitor->accept(this);
 }
 
+
+const WaterParameters::List & WaterParameters::get() const
+{
+    return m_values;
+}

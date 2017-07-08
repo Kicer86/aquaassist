@@ -21,42 +21,41 @@
 
 #include <cassert>
 
-/*
+
 namespace
 {
-    template<typename T> QString displayRoleFor(const T& event);
-
-    template<>
-    QString displayRoleFor<WaterParametrics::List>(const WaterParametrics::List& waterParameters)
+    
+    struct DisplayRoleVisitor: IEventVisitor
     {
-        QString text;
-
-        for(const std::pair<WaterParametrics::Type, WaterParametrics::Value>& param: waterParameters)
+        virtual ~DisplayRoleVisitor() = default;
+        
+        QString roleFor(IEvent* event)
         {
-
+            result.clear();
+            
+            event->visit(this);
+            
+            return result;
         }
+        
+        void accept(WaterParameters* waterParameters) override
+        {            
+            const WaterParameters::List& parameters = waterParameters->get();
+            for(const std::pair<WaterParameters::Type, WaterParameters::Value>& param: parameters)
+            {
 
-        return text;
-    }
-
-    template<typename T> std::deque<std::pair<QDateTime, QString>> displayRoleFor(const EventsContainer<T>& event);
-
-    template<>
-    std::deque<std::pair<QDateTime, QString>> displayRoleFor<WaterParametrics::List>(const EventsContainer<WaterParametrics::List>& waterParameters)
-    {
-        std::deque<std::pair<QDateTime, QString>> result;
-
-        for(const std::pair<QDateTime, WaterParametrics::List>& params: waterParameters.list())
-            result.emplace_back(params.first, displayRoleFor(params.second));
-
-        return result;
-    }
+            }            
+        }
+        
+        QString result;
+    };
+    
 }
-*/
+
 
 EventsModel::EventsModel(): m_events(), m_decorationRoles()
 {
-    //connect(&m_waterParametrics, &WaterParametricsContainer::changed, this, &EventsModel::refreshData);
+    
 }
 
 
