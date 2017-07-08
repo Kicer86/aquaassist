@@ -36,7 +36,7 @@ struct IEvent
     virtual void visit(IEventVisitor *) = 0;
 };
 
-class WaterParametrics: public IEvent
+class WaterParameters: public IEvent
 {
     public:
         enum class Type
@@ -56,8 +56,8 @@ class WaterParametrics: public IEvent
         typedef double Value;
         typedef std::map<Type, Value> List;
         
-        WaterParametrics(const List &);
-        virtual ~WaterParametrics() = default;
+        WaterParameters(const List &);
+        virtual ~WaterParameters() = default;
         
         virtual void visit(IEventVisitor *);
         
@@ -69,7 +69,7 @@ struct IEventVisitor
 {
     virtual ~IEventVisitor() = default;
     
-    virtual void accept(WaterParametrics *) = 0;
+    virtual void accept(WaterParameters *) = 0;
 };
 
 

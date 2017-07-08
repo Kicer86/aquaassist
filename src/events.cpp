@@ -20,13 +20,13 @@
 #include "events.hpp"
 
 
-WaterParametrics::WaterParametrics(const List& v): m_values(v)
+WaterParameters::WaterParameters(const List& v): m_values(v)
 {
     
 }
 
 
-void WaterParametrics::visit(IEventVisitor* visitor)
+void WaterParameters::visit(IEventVisitor* visitor)
 {
     visitor->accept(this);
 }

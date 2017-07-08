@@ -66,9 +66,9 @@ EventsModel::~EventsModel()
 }
 
 
-void EventsModel::insert(const QDateTime& time, const WaterParametrics::List& parametrics)
+void EventsModel::insert(const QDateTime& time, const WaterParameters::List& parametrics)
 {
-    auto waterParameters = std::make_unique<WaterParametrics>(parametrics);
+    auto waterParameters = std::make_unique<WaterParameters>(parametrics);
     m_events.insert(std::make_pair(time, std::move(waterParameters)) );
 }
 

@@ -28,19 +28,19 @@
 
 namespace 
 {
-    typedef std::pair<WaterParametrics::Type, QString> ParameterName;
+    typedef std::pair<WaterParameters::Type, QString> ParameterName;
     const std::array<ParameterName, 10> parameterNames
     {
-        std::make_pair( WaterParametrics::Type::pH,  QObject::tr("pH")  ),
-        std::make_pair( WaterParametrics::Type::GH,  QObject::tr("TwO") ), 
-        std::make_pair( WaterParametrics::Type::KH,  QObject::tr("TwW") ), 
-        std::make_pair( WaterParametrics::Type::NH3, QObject::tr("NH₃") ), 
-        std::make_pair( WaterParametrics::Type::NO2, QObject::tr("NO₂") ),
-        std::make_pair( WaterParametrics::Type::NO3, QObject::tr("NO₃") ), 
-        std::make_pair( WaterParametrics::Type::K,   QObject::tr("K")   ), 
-        std::make_pair( WaterParametrics::Type::P,   QObject::tr("P")   ), 
-        std::make_pair( WaterParametrics::Type::Fe,  QObject::tr("Fe")  ), 
-        std::make_pair( WaterParametrics::Type::CO2, QObject::tr("CO₂") )
+        std::make_pair( WaterParameters::Type::pH,  QObject::tr("pH")  ),
+        std::make_pair( WaterParameters::Type::GH,  QObject::tr("TwO") ), 
+        std::make_pair( WaterParameters::Type::KH,  QObject::tr("TwW") ), 
+        std::make_pair( WaterParameters::Type::NH3, QObject::tr("NH₃") ), 
+        std::make_pair( WaterParameters::Type::NO2, QObject::tr("NO₂") ),
+        std::make_pair( WaterParameters::Type::NO3, QObject::tr("NO₃") ), 
+        std::make_pair( WaterParameters::Type::K,   QObject::tr("K")   ), 
+        std::make_pair( WaterParameters::Type::P,   QObject::tr("P")   ), 
+        std::make_pair( WaterParameters::Type::Fe,  QObject::tr("Fe")  ), 
+        std::make_pair( WaterParameters::Type::CO2, QObject::tr("CO₂") )
     };
 }
 
@@ -99,7 +99,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::addWaterParametrics()
 {
-    WaterParametrics::List parameters;
+    WaterParameters::List parameters;
     
     for (const auto& editor: m_editors)
     {
@@ -108,7 +108,7 @@ void MainWindow::addWaterParametrics()
         if (value.isEmpty() == false)
         {
             const double numeric = value.toDouble();
-            const WaterParametrics::Value parameterValue(numeric);
+            const WaterParameters::Value parameterValue(numeric);
             parameters.emplace(editor.first, parameterValue);
         }
     }
