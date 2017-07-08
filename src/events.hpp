@@ -27,76 +27,50 @@
 #include <QDateTime>
 #include <QObject>
 
+struct IEventVisitor;
 
-namespace WaterParametrics
+struct IEvent
 {
-    enum class Type
-    {
-        pH,
-        GH,
-        KH,
-        NH3,
-        NO2,
-        NO3,
-        K,
-        P,
-        Fe,
-        CO2,
-    };
-
-    typedef double Value;
-    typedef std::map<Type, Value> List;
-}
-
-
-class EventsContainerBase: public QObject
-{
-        Q_OBJECT
-
-    public:
-        EventsContainerBase();
-        virtual ~EventsContainerBase();
-
-    signals:
-        void changed();
+    virtual ~IEvent() = default;
+    
+    virtual void visit(IEventVisitor *) = 0;
 };
 
-
-template<typename T>
-class EventsContainer: public EventsContainerBase
+class WaterParametrics: public IEvent
 {
     public:
-        EventsContainer(): EventsContainerBase(), m_events()
+        enum class Type
         {
-        }
+            pH,
+            GH,
+            KH,
+            NH3,
+            NO2,
+            NO3,
+            K,
+            P,
+            Fe,
+            CO2,
+        };
 
-        EventsContainer(const EventsContainer &) = delete;
-
-        virtual ~EventsContainer()
-        {
-
-        }
-
-        EventsContainer& operator=(const EventsContainer &) = delete;
-
-        void insert(const QDateTime& time, const T& data)
-        {
-            m_events.emplace_back(time, data);
-
-            emit changed();
-        }
-
-        const std::deque< std::pair<QDateTime, T> >& list() const
-        {
-            return m_events;
-        }
-
+        typedef double Value;
+        typedef std::map<Type, Value> List;
+        
+        WaterParametrics(const List &);
+        virtual ~WaterParametrics() = default;
+        
+        virtual void visit(IEventVisitor *);
+        
     private:
-        std::deque<std::pair<QDateTime, T> > m_events;
+        List m_values;
 };
 
-typedef EventsContainer<WaterParametrics::List> WaterParametricsContainer;
+struct IEventVisitor
+{
+    virtual ~IEventVisitor() = default;
+    
+    virtual void accept(WaterParametrics *) = 0;
+};
 
-extern template class EventsContainer<WaterParametrics::List>;
 
 #endif // EVENTS_HPP

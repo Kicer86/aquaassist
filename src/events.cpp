@@ -19,15 +19,15 @@
 
 #include "events.hpp"
 
-template class EventsContainer<WaterParametrics::List>;
 
-
-EventsContainerBase::EventsContainerBase(): QObject()
+WaterParametrics::WaterParametrics(const List& v): m_values(v)
 {
+    
 }
 
 
-EventsContainerBase::~EventsContainerBase()
+void WaterParametrics::visit(IEventVisitor* visitor)
 {
+    visitor->accept(this);
 }
 

@@ -21,7 +21,7 @@
 
 #include <cassert>
 
-
+/*
 namespace
 {
     template<typename T> QString displayRoleFor(const T& event);
@@ -52,11 +52,11 @@ namespace
         return result;
     }
 }
+*/
 
-
-EventsModel::EventsModel(): m_waterParametrics(), m_decorationRoles()
+EventsModel::EventsModel(): m_events(), m_decorationRoles()
 {
-    connect(&m_waterParametrics, &WaterParametricsContainer::changed, this, &EventsModel::refreshData);
+    //connect(&m_waterParametrics, &WaterParametricsContainer::changed, this, &EventsModel::refreshData);
 }
 
 
@@ -68,7 +68,8 @@ EventsModel::~EventsModel()
 
 void EventsModel::insert(const QDateTime& time, const WaterParametrics::List& parametrics)
 {
-    m_waterParametrics.insert(time, parametrics);
+    auto waterParameters = std::make_unique<WaterParametrics>(parametrics);
+    m_events.insert(std::make_pair(time, std::move(waterParameters)) );
 }
 
 
@@ -90,7 +91,7 @@ QVariant EventsModel::data(const QModelIndex& idx, int role) const
 
 int EventsModel::rowCount(const QModelIndex& parent) const
 {
-    const int rows = parent.isValid()? 0 : m_waterParametrics.list().size();
+    const int rows = parent.isValid()? 0 : m_events.size();
 
     return rows;
 }
@@ -106,6 +107,7 @@ int EventsModel::columnCount(const QModelIndex& parent) const
 
 void EventsModel::refreshData()
 {
+    /*
     m_decorationRoles.clear();
 
     const auto waterParametersDecorated = displayRoleFor(m_waterParametrics);
@@ -115,4 +117,5 @@ void EventsModel::refreshData()
     {
         return lhs.first < rhs.first;
     });
+    */
 }

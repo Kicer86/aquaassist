@@ -2,7 +2,7 @@
 find_package(Qt5Widgets REQUIRED)
 
 qt5_wrap_ui(wrapped_ui main_window.ui)
-qt5_wrap_cpp(wrapped_cpp events.hpp)
+#qt5_wrap_cpp(wrapped_cpp events.hpp)
 
 add_executable(aquaassist
                 events.cpp

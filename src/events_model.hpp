@@ -20,6 +20,9 @@
 #ifndef EVENTS_MODEL_HPP
 #define EVENTS_MODEL_HPP
 
+
+#include <memory>
+
 #include <QAbstractTableModel>
 
 #include "events.hpp"
@@ -41,8 +44,7 @@ class EventsModel: public QAbstractTableModel
         int columnCount(const QModelIndex &) const override;
 
     private:
-        WaterParametricsContainer m_waterParametrics;
-
+        std::map<QDateTime, std::unique_ptr<IEvent>> m_events;
         std::deque< std::pair<QDateTime, QString> > m_decorationRoles;
 
         void refreshData();
